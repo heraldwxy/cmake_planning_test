@@ -1,30 +1,15 @@
 cmake_minimum_required(VERSION 3.29.2)
-project(plannning)
+project(planning
+    VERSION 0.0.1
+    DESCRIPTION "module directory cmake configuration"
+    HOMEPAGE_URL "https://github.com/heraldwxy/cmake_planning_test"
+    LANGUAGES CXX
+)
+
 set(CMAKE_CXX_STANDARD 17)
 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin)
-#CMAKE_LIBRARY_OUTPUT_DIRECTORY for linux while above for windows
-#CMAKE_ARCHIVE_OUTPUT_DIRECTORY for static library in linux
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
+set(PNC_Map_Dir ${CMAKE_SOURCE_DIR}/src/pnc_map)
+set(Process_Dir ${CMAKE_SOURCE_DIR}/src/process)
 
-aux_source_directory(${PROJECT_SOURCE_DIR}/src SRC_LISTS)
-add_library(common
-SHARED
-${SRC_LISTS}
-)
-
-target_include_directories(common
-PUBLIC
-${PROJECT_SOURCE_DIR}/include
-)
-
-add_executable(planning_main planning_main.cpp)
-
-target_include_directories(planning_main
-PUBLIC
-${PROJECT_SOURCE_DIR}/include
-)
-
-target_link_libraries(planning_main
-PUBLIC
-common
-)
+add_subdirectory(src)
